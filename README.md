@@ -13,18 +13,21 @@ Before logging into your iCloud account, you must [generate a new SMIBIOS](https
 - **dGPU**: [ASRock AMD Radeon™ RX 6650 XT Challenger D 8GB OC](https://www.asrock.com/Graphics-Card/AMD/Radeon%20RX%206650%20XT%20Challenger%20D%208GB%20OC/)  
 - **RAM**: 32GB DDR4 2666 MHz (Dual Channel)  
 - **Storage**: Hikvision HS-SSD-C2000Pro 1TB NVMe  
-- **Ethernet**: Solarflare SFN6122F (10G) + Intel I219LM11 (1G)  
+- **Disk Burning**: PLDS DVD+/-RW DU-8A5LH (Internal) + HP CDDVDW TS-H653T (External)
+- **Ethernet**: Solarflare SFN6122F (Dual-Port SFP+, 10Gbps) + Intel I219LM11 (1Gbps)  
 - **Wireless**: BCM94360CS2 (Wi-Fi/Bluetooth)  
 
 ## Functional Components  
 ✅ **Working**  
 - CPU power management (Turbo Boost, SpeedStep)  
-- GPU acceleration (RX 6650 XT + iGPU)  
-- Audio (Internal speaker, front/back panel outputs)  
-- USB (All ports except 2 disabled USB2 ports)  
-- Networking (10G LAN + Wi-Fi)  
+- GPU acceleration (iGPU + dGPU)  
+- Audio (Internal speaker, front/back panel outputs, DisplayPort outputs)  
+- USB (All ports except 2 intentionally disabled USB2 ports)  
+- Networking (10Gbps LAN + 1Gbps LAN + Wi-Fi)  
+- Internal & external CD/DVD drives
 - Sleep/Wake functionality  
-- Apple Continuity (Airdrop, Handoff, Sidecar)  
+- Apple Continuity (AirDrop, Auto Unlock, Handoff, Sidecar, Universal Control, etc.)  
+- macOS OTA updates
 
 ⚠️ **Not Working**  
 - DRM content playback (requires Apple T2 security chip)  
@@ -56,10 +59,10 @@ Using [RU.efi](https://github.com/JamesAmiTw/ru-uefi) for BIOS editing:
 
 <img src="Images/97683fd5.png" style="width: 100%; height: auto;">
 
-- Port `0x15` is a 10Gbps Port.
+- Port `0x15` is a 10Gbps port.
 - Ports `0x05` and `0x10` have been disabled to comply with macOS USB port limitations.
 - Follow [Dortania's USB mapping guide](https://dortania.github.io/OpenCore-Post-Install/usb/manual/manual.html) for optimal port configuration.  
 
 ### ACPI Customization
-1. Generate base SSDTs using [SSDTTime](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime)  
-2. Add [SSDT-HPET.aml](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) to resolve IRQ conflicts  
+1. Generate base SSDTs using [SSDTTime](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime).
+2. Add [SSDT-HPET.aml](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) to resolve IRQ conflicts.
