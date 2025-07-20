@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>sfxge</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>com.solarflare.driver.sfxge</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Solarstorm</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.3.4</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>3.3.4</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>Solarflare 10G Ethernet Controller</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.solarflare.driver.sfxge</string>
+			<key>IOClass</key>
+			<string>SfxgeController</string>
+			<key>IOPCIMatch</key>
+			<string>0x08031924 0x08131924</string>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>IOUserClientClass</key>
+			<string>SfxgeUserClient</string>
+			<key>SfxgeConfig</key>
+			<dict>
+			  <key>moderation</key>   <integer>40</integer>
+			  <key>rx_ring_size</key> <integer>1024</integer>
+			  <key>ipv4lro</key> 	  <true/>
+			  <key>ipv6lro</key> 	  <true/>
+			  <key>tx_ring_size</key> <integer>1024</integer>
+			  <key>ipv4tso</key> 	  <true/>
+			  <key>ipv6tso</key> 	  <true/>
+	                </dict>
+	                <key>SfxgeVersion</key>
+	                <string>v3.3.4.6349</string>
+			<key>IOPCITunnelCompatible</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.iokit.IONetworkingFamily</key>
+		<string>1.9</string>
+		<key>com.apple.iokit.IOPCIFamily</key>
+		<string>2.6</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>10.2</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>10.2</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>10.2</string>
+		<key>com.apple.kpi.mach</key>
+		<string>10.2</string>
+	</dict>
+</dict>
+</plist>
