@@ -1,148 +1,65 @@
-# Hackintosh-OptiPlex-7080-MT
+# Hackintosh: Dell OptiPlex 7080 MT  
+**OpenCore Bootloader 1.0.5 | Tested on macOS Ventura 13.7.6**  
 
+<img src="Images/7218edcd.png" style="width: 40%; height: auto;">
 
-**Opencore Bootloader 1.0.2. Tested on Sequoia 15.1**
+## Introduction  
+Before logging into your iCloud account, you must [generate a new SMIBIOS](https://github.com/corpnewt/GenSMBIOS).  
 
-![](https://raw.githubusercontent.com/webleon/Hackintosh-OptiPlex-7080-MT/main/images/iShot2024-10.png)
+## Hardware Specifications  
+- **System**: [Dell OptiPlex 7080 Tower](https://www.dell.com/en-us/work/shop/desktops-all-in-one-pcs/optiplex-7080-tower-and-small-form-factor/spd/optiplex-7080-desktop)  
+- **CPU**: [Intel® Core™ i5-10500](https://www.intel.com/content/www/us/en/products/sku/199277/intel-core-i510500-processor-12m-cache-up-to-4-50-ghz/specifications.html) (6C/12T)  
+- **iGPU**: Intel® UHD Graphics 630  
+- **dGPU**: [ASRock AMD Radeon™ RX 6650 XT Challenger D 8GB OC](https://www.asrock.com/Graphics-Card/AMD/Radeon%20RX%206650%20XT%20Challenger%20D%208GB%20OC/)  
+- **RAM**: 32GB DDR4 2666 MHz (Dual Channel)  
+- **Storage**: Hikvision HS-SSD-C2000Pro 1TB NVMe  
+- **Ethernet**: Solarflare SFN6122F (10G) + Intel I219LM11 (1G)  
+- **Wireless**: BCM94360CS2 (Wi-Fi/Bluetooth)  
 
+## Functional Components  
+✅ **Working**  
+- CPU power management (Turbo Boost, SpeedStep)  
+- GPU acceleration (RX 6650 XT + iGPU)  
+- Audio (Internal speaker, front/back panel outputs)  
+- USB (All ports except 2 disabled USB2 ports)  
+- Networking (10G LAN + Wi-Fi)  
+- Sleep/Wake functionality  
+- Apple Continuity (Airdrop, Handoff, Sidecar)  
 
+⚠️ **Not Working**  
+- DRM content playback (requires Apple T2 security chip)  
 
-## Introdution
-You will have to [**generate a new SMIBIOS**](https://github.com/corpnewt/GenSMBIOS) before login to your iCloud account.
+## BIOS Configuration  
+### Recommended Settings  
+- **System Configuration**  
+  - Serial Port: `Disabled`  
+  - SATA Operation: `AHCI`  
+- **Video**  
+  - Multi Display: `Enabled`  
+  - Primary Display: `Auto`  
+- **Security**  
+  - PTT Security: `Disabled`  
+  - Secure Boot: `Disabled`  
+- **Advanced**  
+  - Intel® SGX™: `Disabled`  
+  - VT for Direct I/O: `Enabled`  
 
+### Advanced Modifications  
+Using [RU.efi](https://github.com/JamesAmiTw/ru-uefi) for BIOS editing:  
+1. **Disable CFG Lock**:  
+   - Navigate to `CPUSetup` → Set `003E` to `0x00`  
+2. **Configure DVMT**:  
+   - Navigate to `SASetup` → Set `00F5` to `0x02` (64MB pre-allocation)  
 
+## Post-Installation  
+### USB Mapping
 
-## Hardware Specs
-* **Desktop Computer**: [Dell OptiPlex 7080 Tower](https://www.dell.com/en-us/work/shop/desktops-all-in-one-pcs/optiplex-7080-tower-and-small-form-factor/spd/optiplex-7080-desktop) 
-* **CPU**:  [Intel® Core™ i7-10700](https://ark.intel.com/content/www/us/en/ark/products/199316/intel-core-i710700-processor-16m-cache-up-to-4-80-ghz.html)
-* **iGPU**: Intel® UHD Graphics 630
-* **GPU**: [ASRock AMD Radeon RX 6600 XT Challenger ITX 8GB](https://www.asrock.com/Graphics-Card/AMD/Radeon%20RX%206600%20XT%20Challenger%20ITX%208GB/)
-* **RAM**: 64GB DDR4 2933 Daul Channel
-* **HDD**: WD Blue SN550 NVMe SSD 1T
-* **LAN**: Intel X540-T2 / AQC107 / Intel I219LM11
-* **Wi-Fi & Bluetooth**: BCM94360NG
+<img src="Images/97683fd5.png" style="width: 100%; height: auto;">
 
+- Port `0x15` is a 10Gbps Port.
+- Ports `0x05` and `0x10` have been disabled to comply with macOS USB port limitations.
+- Follow [Dortania's USB mapping guide](https://dortania.github.io/OpenCore-Post-Install/usb/manual/manual.html) for optimal port configuration.  
 
-
-## Working
-* CPU Turbo Boost & SpeedStep
-* Radeon™ RX 6600 XT & iGPU acceleration
-* Internal Speaker / Front panel headphone out / Back panel lineout
-* USB Ports (rear USB 2.0 ports disabled due to macOS ports limit)
-* 10G LAN & Wireless Network
-* Sleep & Wakeup
-* Airdrop / Airplay /  Handoff
-
-## Not working
-* Sidecar (needs T2 chip)
-* DRM Content in Safari (needs T2 chip)
-
-
-
-## UEFI Settings
-* System Configuration → Serial Port: ***Disabled***
-* System Configuration → SATA Operation: ***AHCI***
-* Video → Multi Display: ***Enable Multi-Display***
-* Video → Primary Display: ***Auto***
-* Security → PTT Security: ***uncheck***
-* Secure Boot → Secure Boot Enable: ***uncheck***
-* Intel® Software Guard Extensions™ → Intel® SGX™ Enable: ***uncheck***
-* Virtualization Support → VT for Direct I/O: ***check***
-
-
-
-## Modify DVMT & CFG_lock settings
-* BIOS/UEFI editor [ru.efi](https://github.com/JamesAmiTw/ru-uefi)
-* Disable CFG lock: 
-set ***003E*** to ***0x00*** under ***CPUSetup***
-* 64M Pre-Allocated DVMT: 
-set ***00F5*** to ***0x02*** under ***SASetup***
-
-
-
-## USB Mapping
-USB ports map:
-![](https://raw.githubusercontent.com/webleon/Hackintosh-OptiPlex-7080-MT/main/images/Dell_OptiPlex_7080_MT.png)
-
-* HS09 and HS10 disabled due to the MacOS USB ports limit.
-* Check [Dortania's guide](https://dortania.github.io/OpenCore-Post-Install/usb/manual/manual.html) for more infos on USB mapping.
-
-
-## ACPI tweaks
-* Create general SSDTs using [SSDTTime](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime) 
-* ~~Add [SSDT-Shutdown.aml](https://dortania.github.io/OpenCore-Post-Install/usb/misc/shutdown.html) to fix shutdown~~ no longer needed
-* ~~Add [SSDT-GPRW.aml](https://dortania.github.io/OpenCore-Post-Install/usb/misc/instant-wake.html) to improve sleep / wake~~ no longer needed
-* Add [SSDT-HPET.aml](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) to fix IRQ conflicts
-
-
-
-## X540-T2 eeprom modification
-### Flashing eeprom could brick the NIC card, do it at your own risk.
-* [Original Guide](https://forums.macrumors.com/threads/modify-retail-intel-10gbe-nics-to-use-small-tree-macos-drivers.1968456/)
-* For my X540-T2 cards, the commands look like this:
-```
-sudo ethtool -E <eth1 name> magic 0x15288086 offset 0x48e value 0x0a
-sudo ethtool -E <eth1 name> magic 0x15288086 offset 0x48f value 0x00
-sudo ethtool -E <eth2 name> magic 0x15288086 offset 0x48e value 0x0a
-sudo ethtool -E <eth2 name> magic 0x15288086 offset 0x48f value 0x00
-```
-
-## OpenCore-Legacy-Patcher
-* [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher) must be applied to get support for WPA Wi-Fi and Personal Hotspot on Broadcom Wi-Fi/BT cards.
-
-## Changelog
-
-**2024-10-31**
-* update to Opencore 1.0.2
-* tested on Sequoia 15.1
-* KEXTs up to date
-* optimize iGPU performance 
-* other minor updates
-
-**2024-01-22**
-* update to Opencore 0.9.7
-* tested on Sonoma 14.2.1
-* KEXTs up to date
-* other minor updates
-  
-**2023-09-26**
-* update to Opencore 0.9.5
-* tested on Sonoma 14.0
-* KEXTs up to date
-* other minor updates
-
-**2022-12-20**
-* update to Opencore 0.8.7
-* tested on Ventura 13.1
-* KEXTs up to date
-* other minor updates
-
-**2022-11-07**
-* update to Opencore 0.8.5
-* tested on Ventura 13.0
-* KEXTs up to date
-* other minor updates
-
-**2022-07-02**
-* suport AQC107 10GbE LAN (VT for Direct I/O need to be enabled in UEFI)
-* update to Opencore 0.8.1
-* KEXTs up to date
-* other minor updates
-
-**2022-05-23**
-* update to Opencore 0.8.0
-* tested on Monterey 12.4 release
-* minor updates
-
-**2021-12-15**
-* update to Opencore 0.7.6
-* tested on Monterey 12.1 release
-* add iGPU config
-* minor updates
-
-**2021-12-04**
-* remove no longer needed SSDT-Shutdown.aml 
-* add [RadeonSensor](https://github.com/aluveitie/RadeonSensor) to show Radeon GPU temperature
-
-**2021-11-27**
-* initial upload
+### ACPI Customization
+1. Generate base SSDTs using [SSDTTime](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime)  
+2. Add [SSDT-HPET.aml](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) to resolve IRQ conflicts  
