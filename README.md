@@ -1,5 +1,5 @@
 # Hackintosh: Dell OptiPlex 7080 MT  
-**OpenCore Bootloader 1.0.5 | Tested on macOS Ventura 13.7.6**  
+**OpenCore Bootloader 1.0.5 | Tested on macOS Ventura 13.7.8**  
 
 <img src="Images/7218edcd.png" style="width: 40%; height: auto;">
 
